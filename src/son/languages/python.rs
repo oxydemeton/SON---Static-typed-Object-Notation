@@ -48,5 +48,8 @@ pub fn build(file_path: &str, class_name: &str, map: HashMap<String, son::Types>
         };
         f.write(b"            el").unwrap();
     }
-    f.write(b"se:\n                raise Exception(\"Unknown parameter: \" + name)").unwrap();
+    f.write(b"se:\n                raise Exception(\"Unknown parameter: \" + name)\n\n").unwrap();
+
+    //Constructor
+    f.write(b"    def __init__(self, txt: str):\n        self.from_string(txt)\n").unwrap();
 }
