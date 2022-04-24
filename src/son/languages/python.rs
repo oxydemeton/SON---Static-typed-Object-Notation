@@ -27,7 +27,7 @@ pub fn build(file_path: &str, class_name: &str, map: HashMap<String, son::Types>
     }
     
     //From String constant part of the function
-    f.write(b"    def from_string(self, txt: str):\n        lines = txt.split(\"\\n\")\n        for i in range(len(lines)):\n            lines[i] = lines[i].strip()\n        for l in lines:\n            (name, value) = l.split(\"=\")\n            name = name.strip()\n            value = value.strip()\n").unwrap();    
+    f.write(b"\n    def from_string(self, txt: str):\n        lines = txt.split(\"\\n\")\n        for i in range(len(lines)):\n            lines[i] = lines[i].strip()\n        for l in lines:\n            (name, value) = l.split(\"=\")\n            name = name.strip()\n            value = value.strip()\n").unwrap();    
 
     f.write(b"            ").unwrap();
     for (name, typ) in map.iter(){
@@ -49,6 +49,13 @@ pub fn build(file_path: &str, class_name: &str, map: HashMap<String, son::Types>
         f.write(b"            el").unwrap();
     }
     f.write(b"se:\n                raise Exception(\"Unknown parameter: \" + name)\n\n").unwrap();
+
+    //to_string function
+    f.write(b"    def to_string(self):\n        out  = \"\"\n").unwrap();
+    for (name, _) in map.iter(){
+        f.write(format!("        out += \"{}=\" + str(self.{})\n", name, name).as_bytes()).unwrap();
+    }
+    f.write(b"        return out\n\n").unwrap();
 
     //Constructor
     f.write(b"    def __init__(self, txt: str):\n        self.from_string(txt)\n").unwrap();
