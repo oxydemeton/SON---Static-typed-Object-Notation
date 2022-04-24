@@ -1,7 +1,7 @@
 class example_class:
     str_string:str
-    char:str
     integer:int
+    char:str
     def from_string(self, txt: str):
         lines = txt.split("\n")
         for i in range(len(lines)):
@@ -11,16 +11,10 @@ class example_class:
             name = name.strip()
             value = value.strip()
             if name == "str_string":
-                self.str_string = value.replace(" \"", "")
-            elif name == "char":
-                self.char = value.replace(" \'", "")
+                self.str_string = value.replace("\"", "")
             elif name == "integer":
                 self.integer = int(value)
+            elif name == "char":
+                self.char = value.replace("\'", "")
             else:
                 raise Exception("Unknown parameter: " + name)
-
-
-if __name__ == "__main__":
-    a = example_class()
-    a.from_string("str_string = \"Hello World\"\ninteger = 1337\nchar = \"a\"")
-    print(a.str_string, a.char, a.integer)
