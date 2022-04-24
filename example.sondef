@@ -1,5 +1,5 @@
 
-string name
-string url
+str name
+str url
 uint followers
-string latest_video_url
+str latest_video_url

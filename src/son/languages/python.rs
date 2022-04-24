@@ -60,7 +60,7 @@ pub fn build(file_path: &str, class_name: &str, map: HashMap<String, son::Types>
     //get_def function
     f.write(b"    def get_def(self):\n        out  = \"\"\n").unwrap();
     for (name, typ) in map.iter(){
-        f.write(format!("        out += \"{:?} {}\"\n", typ, name).replace("Str", "String").as_bytes()).unwrap();
+        f.write(format!("        out += \"{:?} {}\"\n", typ, name).as_bytes()).unwrap();
     }
     f.write(b"        return out\n\n").unwrap();
 

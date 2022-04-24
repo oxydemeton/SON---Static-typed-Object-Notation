@@ -32,13 +32,13 @@ pub fn lines_to_hashmap(lines: Vec<String>) -> HashMap<String, son::Types> {
                 typ = Some(son::Types::Ulong);
             }else if typ_str == "bool"{
                 typ = Some(son::Types::Bool);
-            }else if typ_str == "float"{
+            }else if typ_str == "f32"{
                 typ = Some(son::Types::F32);
-            }else if typ_str == "double"{
+            }else if typ_str == "f64"{
                 typ = Some(son::Types::F64);
             }else if typ_str == "char"{
                 typ = Some(son::Types::Char);
-            }else if typ_str == "string"{
+            }else if typ_str == "str"{
                 typ = Some(son::Types::Str);
             }
             match typ{
