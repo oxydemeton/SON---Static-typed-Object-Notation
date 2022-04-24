@@ -2,7 +2,6 @@ pub mod python;
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum Langs{
-    C,  // C not implemented yet
     Rust, // Rust not implemented yet
     Python, // Python not implemented yet
     Java, // Java not implemented yet
