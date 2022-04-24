@@ -19,7 +19,7 @@ pub fn build(file_path: &str, class_name: &str, map: HashMap<String, son::Types>
             son::Types::F64     => f.write(b"float").unwrap(),
             son::Types::Char    => f.write(b"str").unwrap(),
             son::Types::Str     => f.write(b"str").unwrap(),
-            son::Types::Vec     => todo!(),
+            son::Types::Vec(_)     => todo!(),
             son::Types::Arr(_)  => todo!(),
             son::Types::Obj(_)  => todo!()
         };
@@ -42,7 +42,7 @@ pub fn build(file_path: &str, class_name: &str, map: HashMap<String, son::Types>
             son::Types::F64     => f.write(format!("                self.{} = float(value)\n", name).as_bytes()).unwrap(),
             son::Types::Char    => f.write(format!("                self.{} = value.replace(\"\\\'\", \"\")\n", name).as_bytes()).unwrap(),
             son::Types::Str     => f.write(format!("                self.{} = value.replace(\"\\\"\", \"\")\n", name).as_bytes()).unwrap(),
-            son::Types::Vec     => todo!(),
+            son::Types::Vec(_)     => todo!(),
             son::Types::Arr(_)  => todo!(),
             son::Types::Obj(_)  => todo!()
         };

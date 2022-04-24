@@ -13,7 +13,7 @@ pub mod son {
         F64,
         Char,
         Str,
-        Vec,
+        Vec(Box<Types>),
         Arr(usize),
         Obj(HashMap<String, Types>)
     }
@@ -25,7 +25,8 @@ pub mod son {
         //read file lines and call lines_to_hashmap
         let lines = file_processing::read_file_lines(file_path);
         let map = file_processing::lines_to_hashmap(lines);
-        languages::python::build("example.py", "example_class", map);
+        println!("{:?}", map);
+        //languages::python::build("example.py", "example_class", map);
 
     }
 }
