@@ -23,7 +23,30 @@ pub fn build(file_path: &str, class_name: &str, map: HashMap<String, son::Types>
             son::Types::Arr(_)  => todo!(),
             son::Types::Obj(_)  => todo!()
         };
-        f.write(b"\n").unwrap();
+        f.write(b"\n").unwrap();        
     }
     
+    //From String constant part of the function
+    f.write(b"    def from_string(self, txt: str):\n        lines = txt.split(\"\\n\")\n        for i in range(len(lines)):\n            lines[i] = lines[i].strip()\n        for l in lines:\n            (name, value) = l.split(\"=\")\n            name = name.strip()\n            value = value.strip()\n").unwrap();    
+
+    f.write(b"            ").unwrap();
+    for (name, typ) in map.iter(){
+        f.write(format!("if name == \"{}\":\n", name).as_bytes()).unwrap();
+        match typ{
+            son::Types::Int     => f.write(format!("                self.{} = int(value)\n", name).as_bytes()).unwrap(),
+            son::Types::Long    => f.write(format!("                self.{} = int(value)\n", name).as_bytes()).unwrap(),
+            son::Types::Uint    => f.write(format!("                self.{} = int(value)\n", name).as_bytes()).unwrap(),
+            son::Types::Ulong   => f.write(format!("                self.{} = int(value)\n", name).as_bytes()).unwrap(),
+            son::Types::Bool    => f.write(format!("                self.{} = bool(value)\n", name).as_bytes()).unwrap(),
+            son::Types::F32     => f.write(format!("                self.{} = float(value)\n", name).as_bytes()).unwrap(),
+            son::Types::F64     => f.write(format!("                self.{} = float(value)\n", name).as_bytes()).unwrap(),
+            son::Types::Char    => f.write(format!("                self.{} = value.replace(\"\\\'\", \"\")\n", name).as_bytes()).unwrap(),
+            son::Types::Str     => f.write(format!("                self.{} = value.replace(\"\\\"\", \"\")\n", name).as_bytes()).unwrap(),
+            son::Types::Vec     => todo!(),
+            son::Types::Arr(_)  => todo!(),
+            son::Types::Obj(_)  => todo!()
+        };
+        f.write(b"            el").unwrap();
+    }
+    f.write(b"se:\n                raise Exception(\"Unknown parameter: \" + name)").unwrap();
 }
