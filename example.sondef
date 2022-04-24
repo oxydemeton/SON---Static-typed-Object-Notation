@@ -1,3 +1,5 @@
-String str_string
-int integer
-char char
+
+string name
+string url
+uint followers
+string latest_video_url
