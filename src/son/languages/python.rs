@@ -57,6 +57,13 @@ pub fn build(file_path: &str, class_name: &str, map: HashMap<String, son::Types>
     }
     f.write(b"        return out\n\n").unwrap();
 
+    //get_def function
+    f.write(b"    def get_def(self):\n        out  = \"\"\n").unwrap();
+    for (name, typ) in map.iter(){
+        f.write(format!("        out += \"{:?} {}\"\n", typ, name).replace("Str", "String").as_bytes()).unwrap();
+    }
+    f.write(b"        return out\n\n").unwrap();
+
     //Constructor
     f.write(b"    def __init__(self, txt: str):\n        self.from_string(txt)\n").unwrap();
 }
