@@ -13,7 +13,8 @@ pub fn read_file_lines(path: &str) -> Vec<String> {
 pub fn lines_to_hashmap(lines: Vec<String>) -> HashMap<String, son::Types> {
     
     let mut map: HashMap<String, son::Types> = HashMap::new();
-    for line in lines {
+    for mut line in lines {
+        line = String::from(line.trim());
         if line.contains(" ") {
             let mut words = line.split(" ");
             let typ_str: String = words.next().unwrap().to_lowercase();
