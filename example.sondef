@@ -3,4 +3,3 @@ str name
 str url
 uint followers
 str latest_video_url
-Vec:Vec:int nums
